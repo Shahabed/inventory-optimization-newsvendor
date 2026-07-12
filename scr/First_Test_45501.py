@@ -23,7 +23,7 @@ def newsvendor_complete(shops):
     """Return the optimal quantities for every shop and every weekday for OGR = 7"""
     #load data
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('.....', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, VK.KALWT, (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK 
     LEFT JOIN (SELECT a.[EH_KEY]
       ,a.[OBJ_KEY]
@@ -90,10 +90,6 @@ def get_worst50shops(HKDFIL,dat1, dat2):
 
 
 
-
-
-
-
 def get_costs(start_date,shops):
     """
     shops must be a tuple
@@ -108,7 +104,7 @@ def get_costs(start_date,shops):
     end_date_test = end_date_test.year*10000+end_date_test.month*100+end_date_test.day
     start_date2 = start_date2.year*10000+start_date2.month*100+start_date2.day
     
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.EVT, VK.OBJ_KEY, VK.KALWT, (VK.BEZUG-VK.REMI) as VERKAUF, VK.BEZUG,  LS.EV as EV from 
     ablage.eh.tb_verkauf_mars AS VK LEFT JOIN [ANWENDUNG].[kpi].[TB_EH_S] AS HKD ON VK.EH_KEY = HKD.EH_KEY
       LEFT JOIN (SELECT a.[EH_KEY]
