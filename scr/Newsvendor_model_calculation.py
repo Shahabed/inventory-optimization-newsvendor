@@ -35,7 +35,7 @@ def newsvendor_complete():
     """Return the optimal quantities for every shop and every weekday for OGR = 7"""
     #load data
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, VK.KALWT, (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK 
     LEFT JOIN (SELECT a.[EH_KEY]
       ,a.[OBJ_KEY]
@@ -73,7 +73,7 @@ print('It took', time.time()-start, 'seconds.')
 #%% Newsvendor per Grosso fil
 def newsvendor_grossofil_complete(HKDFIL2_KEY):
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, VK.KALWT, (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK LEFT JOIN [ANWENDUNG].[kpi].[TB_EH_S] AS HKD ON VK.EH_KEY = HKD.EH_KEY
     LEFT JOIN [Regulierungsstatistik].[dbo].[TB_MO_LOST_SALES] as LS ON VK.EH_KEY = LS.EH_KEY and VK.OBJ_KEY = LS.OBJ_KEY and VK.EVT = (YEAR(LS.EVT)*10000 + MONTH(LS.EVT)*100 + DAY(LS.EVT)) 
     where VK.EVT >= 20220101 and VK.OGR_KEY = 7 and HKD.HKDFIL2_KEY = {HKDFIL2_KEY} ''' #and VK.KALWT = {WD}
@@ -97,7 +97,7 @@ print('It took', time.time()-start, 'seconds.')
 #%% Newsvendor per Grosso, faster than per Grosso fil
 def newsvendor_grossofil_complete(HKD):
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, VK.KALWT, (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK LEFT JOIN [ANWENDUNG].[kpi].[TB_EH_S] AS HKD ON VK.EH_KEY = HKD.EH_KEY
     LEFT JOIN [Regulierungsstatistik].[dbo].[TB_MO_LOST_SALES] as LS ON VK.EH_KEY = LS.EH_KEY and VK.OBJ_KEY = LS.OBJ_KEY and VK.EVT = (YEAR(LS.EVT)*10000 + MONTH(LS.EVT)*100 + DAY(LS.EVT)) 
     where VK.EVT >= 20220101 and VK.OGR_KEY = 7 and HKD.HKD_KEY = {HKD} ''' #and VK.KALWT = {WD}
@@ -123,7 +123,7 @@ print('It took', time.time()-start, 'seconds.')
 
 #%%compare current costs against NV costs
 def compare(NV_RES):
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, VK.KALWT,VK.BEZUG,  (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK LEFT JOIN [ANWENDUNG].[kpi].[TB_EH_S] AS HKD ON VK.EH_KEY = HKD.EH_KEY
     LEFT JOIN [Regulierungsstatistik].[dbo].[TB_MO_LOST_SALES] as LS ON VK.EH_KEY = LS.EH_KEY and VK.OBJ_KEY = LS.OBJ_KEY and VK.EVT = (YEAR(LS.EVT)*10000 + MONTH(LS.EVT)*100 + DAY(LS.EVT)) 
     where VK.EVT >= 20220101 and VK.EVT < 20230101 and VK.OGR_KEY = 7 ''' 
@@ -143,7 +143,7 @@ def compare(NV_RES):
 #%% Newsvendor per Grossofil and Weekday, slower than Newsvendor per Grossofil
 def newsvendor_grosso_weekday(HKDFIL2_KEY, WD):
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK LEFT JOIN [ANWENDUNG].[kpi].[TB_EH_S] AS HKD ON VK.EH_KEY = HKD.EH_KEY
     LEFT JOIN [Regulierungsstatistik].[dbo].[TB_MO_LOST_SALES] as LS ON VK.EH_KEY = LS.EH_KEY and VK.OBJ_KEY = LS.OBJ_KEY and VK.EVT = (YEAR(LS.EVT)*10000 + MONTH(LS.EVT)*100 + DAY(LS.EVT)) 
     where VK.EVT >= 20210101 and VK.EVT < 20220101 and VK.OGR_KEY = 7 and HKD.HKDFIL2_KEY = {HKDFIL2_KEY} and VK.KALWT = {WD} ''' 
@@ -158,7 +158,7 @@ def newsvendor_grosso_weekday(HKDFIL2_KEY, WD):
 #%% Newsvendor per Grossofil and Weekday, slower than Newsvendor per Grossofil
 def newsvendor_grosso_weekday(HKDFIL2_KEY, WD):
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, (VK.BEZUG-VK.REMI) as VERKAUF,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK LEFT JOIN [ANWENDUNG].[kpi].[TB_EH_S] AS HKD ON VK.EH_KEY = HKD.EH_KEY
     LEFT JOIN (SELECT a.[EH_KEY]
       ,a.[OBJ_KEY]
