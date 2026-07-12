@@ -1,2 +1,40 @@
-# inventory-optimization-newsvendor
-Applied Newsvendor model for optimal inventory ordering in print media wholesale distribution. Demand estimation from censored sales + lost sales, empirical &amp; kernel density distributions, critical ratio optimization, full-network &amp; per-wholesaler calculations, and before/after evaluation of a real supply test (Bezugstest).
+# Newsvendor Inventory Optimization
+
+## Overview
+Implementation of the classic Newsvendor (newsboy) model for daily/weekly optimal ordering (`Q`) in a print distribution network.  
+The goal is to minimise expected **overage + underage costs** given uncertain demand.
+
+## The Newsvendor Model
+- Overage cost (`c_o`) and Underage cost (`c_u`)
+- Critical ratio = `c_u / (c_o + c_u)`
+- Optimal `Q` = smallest value where CDF(demand) ≥ critical ratio
+
+See `docs/Theoretical_Notes_Newsvendor.md` for full derivation.
+
+## Project Structure
+- `scripts/` — core calculation scripts (single shop, per Grosso, full network, test evaluation)
+- `docs/` — theory + project explanation
+- `presentation/` — slides
+
+## Key Scripts
+- `Newsvendor_model_calculation.py` — full OGR + per-Grosso versions
+- `First_Test_45501.py` — worst-shop identification + newsvendor
+- `Auswertung_Bezugstest.py` — before/after analysis of the real supply test
+
+## Results / Impact
+(You can add key numbers from the Bezugstest evaluation here — cost reduction, sold-out quota improvement, etc.)
+
+## Data & Running the Code
+Real data lives in an internal SQL Server (`Regulierungsstatistik`).  
+For public use the scripts expect either:
+- CSV exports, or
+- You to adapt the data loading layer.
+
+**Important:** Connection strings have been removed for security. Use environment variables or a local `config.yaml` (gitignored).
+
+## Bayesian Extension (optional)
+A small PyMC example on price/demand modeling is included in `extensions/bayes_test.py` (uses the public `renfe.csv` sample). It is not core to the newsvendor work.
+
+## References
+- Theoretical notes (internal)
+- Explanation_Marktoptimierung
