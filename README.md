@@ -21,8 +21,6 @@ See `docs/Theoretical_Notes_Newsvendor.md` for full derivation.
 - `First_Test_45501.py` — worst-shop identification + newsvendor
 - `Auswertung_Bezugstest.py` — before/after analysis of the real supply test
 
-## Results / Impact
-(You can add key numbers from the Bezugstest evaluation here — cost reduction, sold-out quota improvement, etc.)
 
 ## Data & Running the Code
 Real data lives in an internal SQL Server (`Regulierungsstatistik`).  
@@ -38,3 +36,18 @@ A small PyMC example on price/demand modeling is included in `extensions/bayes_t
 ## References
 - Theoretical notes (internal)
 - Explanation_Marktoptimierung
+## newsvendor-inventory-optimization/
+├── README.md
+├── docs/
+│   ├── Theoretical_Notes_Newsvendor.md          
+│   └── Marktoptimierung_Explanation.md   
+│   └── DSE_inventory_optimization.pptx
+├── scripts/
+│   ├── newsvendor_core.py                       
+│   ├── Newsvendor_model_calculation.py          
+│   ├── First_Test_45501.py                     
+│   └── Auswertung_Bezugstest.py                
+├── extensions/ (optional)
+│   ├── bayes_test.py
+│   └── renfe_sample.csv                        
+└── .gitignore
