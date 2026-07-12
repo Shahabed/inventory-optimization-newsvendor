@@ -36,7 +36,7 @@ A small PyMC example on price/demand modeling is included in `extensions/bayes_t
 ## References
 - Theoretical notes (internal)
 - Explanation_Marktoptimierung
-## newsvendor-inventory-optimization/
+## newsvendor-inventory-optimization
 ├── README.md
 ├── docs/
 │   ├── Theoretical_Notes_Newsvendor.md          
