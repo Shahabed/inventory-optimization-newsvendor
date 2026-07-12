@@ -20,7 +20,7 @@ def newsvendor_complete(shops):
     """Return the optimal quantities for every shop and every weekday for OGR = 7"""
     #load data
     print(f'start {datetime.datetime.today()}')
-    conn  = sqlalchemy.create_engine('mssql://deaxsmapsql01.itservices.asudc.net,6200/Regulierungsstatistik?trusted_connection=yes&driver=SQL+Server', fast_executemany=True)
+    conn  = sqlalchemy.create_engine('...', fast_executemany=True)
     sql = f'''select VK.EH_KEY, VK.OBJ_KEY, VK.EVT, VK.KALWT, (VK.BEZUG-VK.REMI) as VERKAUF, VK.BEZUG,  LS.EV as EV from ablage.eh.tb_verkauf_mars AS VK 
     LEFT JOIN (SELECT a.[EH_KEY]
       ,a.[OBJ_KEY]
