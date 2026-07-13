@@ -14,7 +14,7 @@ See `docs/Theoretical_Notes_Newsvendor.md` for full derivation.
 ## Project Structure
 - `scripts/` — core calculation scripts (single shop, per Grosso, full network, test evaluation)
 - `docs/` — theory + project explanation
-- `presentation/` — slides
+- `extensions'
 
 ## Key Scripts
 - `Newsvendor_model_calculation.py` — full OGR + per-Grosso versions
@@ -47,7 +47,7 @@ A small PyMC example on price/demand modeling is included in `extensions/bayes_t
 │   ├── Newsvendor_model_calculation.py          
 │   ├── First_Test_45501.py                     
 │   └── Auswertung_Bezugstest.py                
-├── extensions/ (optional)
+├── extensions/ 
 │   ├── bayes_test.py
 │   └── renfe_sample.csv                        
 └── .gitignore
